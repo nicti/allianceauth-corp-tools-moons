@@ -152,6 +152,23 @@ class MoonsCog(commands.Cog):
             else:
                 await ctx.send(f"```{message}```")
 
+    @pinger_commands.command(name='unknown', guild_ids=[int(settings.DISCORD_GUILD_ID)])
+    async def uknown_slash(self, ctx):
+        if not self.sender_has_moon_perm(ctx):
+            return await ctx.respond(f"You do not have permision to use this command.", ephemeral=True)
+
+        await ctx.respond(f"Calculating the Moon Stats.")
+        chars = set()
+        data = InvoiceRecord.generate_invoice_data()
+    
+        for u, d in data['unknowns'].items():
+            try:
+                chars.add(d['character_model'].name)
+            except KeyError:
+                pass  # probably wanna ping admin about it.
+        
+        list = "\n".join(list(chars))
+        ctx.channel.send(f"```{list}```")
 
 def setup(bot):
     bot.add_cog(MoonsCog(bot))
