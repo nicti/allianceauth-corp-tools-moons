@@ -156,8 +156,6 @@ class MoonsCog(commands.Cog):
     async def unknown_slash(self, ctx):
         if not self.sender_has_moon_perm(ctx):
             return await ctx.respond(f"You do not have permision to use this command.", ephemeral=True)
-
-        await ctx.respond(f"Calculating the Moon Stats.")
         chars = set()
         data = InvoiceRecord.generate_invoice_data()
     
@@ -165,13 +163,10 @@ class MoonsCog(commands.Cog):
         if (len(items) == 0):
             return await ctx.respond(f"No unknown chars!")
         for u, d in items:
-            try:
-                chars.add(d['character_model'].name)
-            except KeyError:
-                pass  # probably wanna ping admin about it.
+            chars.add(d['character_model'].name)
         
         message = "\n ".join(list(chars))
-        ctx.send(f"```{message}```")
+        await ctx.respond(f"```{message}```")
 
 def setup(bot):
     bot.add_cog(MoonsCog(bot))
