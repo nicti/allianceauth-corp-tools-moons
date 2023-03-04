@@ -161,14 +161,17 @@ class MoonsCog(commands.Cog):
         chars = set()
         data = InvoiceRecord.generate_invoice_data()
     
-        for u, d in data['unknowns'].items():
+        items = data['unknowns'].items()
+        if (len(items) == 0):
+            return await ctx.respond(f"No unknown chars!")
+        for u, d in items:
             try:
                 chars.add(d['character_model'].name)
             except KeyError:
                 pass  # probably wanna ping admin about it.
         
-        listing = "\n ".join(list(chars))
-        ctx.send(f"```{listing}```")
+        message = "\n ".join(list(chars))
+        ctx.send(f"```{message}```")
 
 def setup(bot):
     bot.add_cog(MoonsCog(bot))
