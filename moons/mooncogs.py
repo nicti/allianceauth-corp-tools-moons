@@ -165,7 +165,7 @@ class MoonsCog(commands.Cog):
         for u, d in items:
             chars.add(d['character_model'].name)
         
-        message = "\n ".join(list(chars))
+        message = "\n".join(list(chars))
         await ctx.respond(f"```{message}```")
 
 def setup(bot):
