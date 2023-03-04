@@ -167,8 +167,8 @@ class MoonsCog(commands.Cog):
             except KeyError:
                 pass  # probably wanna ping admin about it.
         
-        listing = "\n".join(list(chars))
-        ctx.channel.send(f"```{listing}```")
+        listing = "\n ".join(list(chars))
+        ctx.send(f"```{listing}```")
 
 def setup(bot):
     bot.add_cog(MoonsCog(bot))
