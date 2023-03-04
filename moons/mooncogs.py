@@ -153,7 +153,7 @@ class MoonsCog(commands.Cog):
                 await ctx.send(f"```{message}```")
 
     @pinger_commands.command(name='unknown', guild_ids=[int(settings.DISCORD_GUILD_ID)])
-    async def uknown_slash(self, ctx):
+    async def unknown_slash(self, ctx):
         if not self.sender_has_moon_perm(ctx):
             return await ctx.respond(f"You do not have permision to use this command.", ephemeral=True)
 
@@ -167,8 +167,8 @@ class MoonsCog(commands.Cog):
             except KeyError:
                 pass  # probably wanna ping admin about it.
         
-        list = "\n".join(list(chars))
-        ctx.channel.send(f"```{list}```")
+        listing = "\n".join(list(chars))
+        ctx.channel.send(f"```{listing}```")
 
 def setup(bot):
     bot.add_cog(MoonsCog(bot))
